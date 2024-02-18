@@ -36,13 +36,20 @@ public class Pile {
             System.out.println(this.cards.get(i));
         }
     }
+    public ArrayList<Card> getCards() {
+        return this.cards;
+    }
+    public void addCards(ArrayList<Card> cards2) {
+        this.cards.addAll(cards2);
+    }
+    public void eraseAll() {
+        this.cards.clear();
+    }
     public static void main(String[] args) {
         Pile mazo = new Pile();
-        Deck d0 = new Deck();
-        d0.shuffle();
+        Deck d0 = new Deck(4);
         mazo.addDeck(d0);
-        mazo.insertionSort();
-        mazo.display();
+        System.out.println(mazo.cards.size());
     }
     /*public static void main(String[] args) {
         Deck deck = new Deck();
