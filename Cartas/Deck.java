@@ -1,6 +1,7 @@
 import java.util.Random;
 public class Deck {
     private Card[] deck;
+    private static Random random = new Random();
     private static final int numSuits = 4;
     private static final int numRanks = 13;
 
@@ -12,21 +13,17 @@ public class Deck {
             }
         }
     }
-
     public Deck(int n) {
         this.deck = new Card[n];
     }
-
     public Card[] getDeck() {
         return this.deck;
     }
-
     public void display() {
         for (int i = 0; i < this.deck.length; i++) {
             System.out.println(deck[i]);
         }
     }
-
     public String toString() {
         StringBuilder text = new StringBuilder();
         for (int i = 0; i < this.deck.length; i++) {
@@ -37,7 +34,6 @@ public class Deck {
         }
         return text.toString();
     }
-
     public int[] suitHist() {
         int[] hist = new int[numSuits];
         for (int i = this.deck.length -1; i >= 0; i--) {
@@ -45,7 +41,6 @@ public class Deck {
         }
         return hist;
     }
-
     public boolean hasFlush() {
         boolean has = false;
         int[] hist = this.suitHist();
@@ -57,7 +52,6 @@ public class Deck {
         }
         return has;
     }
-
     public int[] royalSuitHist() {
         int[] hist = new int[numSuits];
         for (int i = this.deck.length -1; i >= 0; i--) {
@@ -65,7 +59,6 @@ public class Deck {
         }
         return hist;
     }
-
     public boolean hasRoyalFlush() {
         boolean has = false;
         int[] hist = this.royalSuitHist();
@@ -77,19 +70,15 @@ public class Deck {
         }
         return has;
     }
-
     private static int randomInt(int low, int high) {
-        Random random = new Random();
         return random.nextInt(low, high +1);
     }
-    
     private void swapCards(int i, int j) {
         Card card;
         card = this.deck[i];
         this.deck[i] = this.deck[j];
         this.deck[j] = card;
     }
-
     public void shuffle() {
         int a;
         for (int i = this.deck.length-1; i > 0; i--) {
@@ -97,7 +86,6 @@ public class Deck {
             swapCards(i, a);
         }
     }
-
     private int indexLowest(int low, int high) {
         int indexLowest = low;
         for (int i = low; i <= high; i++) {
@@ -105,13 +93,11 @@ public class Deck {
         }
         return indexLowest;
     }
-
     public void selectionSort() {
         for (int i = 0; i < this.deck.length; i++) {
             swapCards(i, indexLowest(i, this.deck.length -1));
         }
     }
-
     public Deck subdeck(int low, int high) {
         Deck sub = new Deck(high - low + 1);
         for (int i = 0; i < sub.deck.length; i++) {
@@ -119,7 +105,6 @@ public class Deck {
         }
         return sub;
     }
-
     private static Deck merge(Deck d1, Deck d2) {
         Deck d3 = new Deck(d1.getDeck().length + d2.getDeck().length);
 
@@ -162,7 +147,6 @@ public class Deck {
         return d3;
         // return the new deck
     }
-
     public Deck almostMergeSort() {
         int mid = this.deck.length /2;
         Deck d1 = this.subdeck(0, mid-1);
@@ -174,7 +158,6 @@ public class Deck {
         // sort the subdecks using selectionSort
         // merge the subdecks, return the result
     }
-
     public Deck mergeSort() {
         // if the deck has 0 or 1 cards, return it
         // otherwise, divide the deck into two subdecks
@@ -195,7 +178,7 @@ public class Deck {
         }
         return d3; 
     }
-
+    
     /*public static void main(String[] args) {
         Deck d0 = new Deck();
         d0.shuffle();
@@ -204,6 +187,7 @@ public class Deck {
     }*/
     public static void main(String[] args) {
         Deck d0 = new Deck();
+        d0.shuffle();
         System.out.println(d0);
     }
 }

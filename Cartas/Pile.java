@@ -20,7 +20,31 @@ public class Pile {
             this.cards.add(card);
         }
     }
+    public void insertionSort() {
+        
+        for (int i = 1; i < this.cards.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (this.cards.get(i).compareTo(this.cards.get(j)) == -1) {
+                    this.cards.add(j, this.cards.get(i));
+                    this.cards.remove(i+1);
+                }
+            }
+        }
+    }
+    public void display() {
+        for (int i = 0; i < this.cards.size(); i++) {
+            System.out.println(this.cards.get(i));
+        }
+    }
     public static void main(String[] args) {
+        Pile mazo = new Pile();
+        Deck d0 = new Deck();
+        d0.shuffle();
+        mazo.addDeck(d0);
+        mazo.insertionSort();
+        mazo.display();
+    }
+    /*public static void main(String[] args) {
         Deck deck = new Deck();
         deck.shuffle();
         Pile p1 = new Pile();
@@ -42,7 +66,7 @@ public class Pile {
                 p2.addCard(c1);
                 p2.addCard(c2);
             } else {
-                
+
                 // it's a tie
             }
         }
@@ -51,5 +75,5 @@ public class Pile {
         } else {
             System.out.println("Player 2 wins!");
         }
-    }
+    }*/
 }
