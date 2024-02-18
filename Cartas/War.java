@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Simulates a simple card game.
  */
